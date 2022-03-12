@@ -3,8 +3,8 @@ package com.codixlab.collapsingrecyclerview.util.decorator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class LineItemDecorator extends RecyclerView.ItemDecoration {
 
