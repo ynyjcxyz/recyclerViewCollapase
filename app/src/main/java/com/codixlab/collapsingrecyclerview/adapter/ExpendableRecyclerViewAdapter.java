@@ -1,16 +1,19 @@
 package com.codixlab.collapsingrecyclerview.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import androidx.databinding.DataBindingUtil;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.codixlab.collapsingrecyclerview.R;
-import com.codixlab.collapsingrecyclerview.databinding.ItemExpandBinding;
 import com.codixlab.collapsingrecyclerview.model.Person;
 import com.codixlab.collapsingrecyclerview.util.animation.Animations;
 import com.squareup.picasso.Picasso;
@@ -32,25 +35,23 @@ public class ExpendableRecyclerViewAdapter extends RecyclerView.Adapter<Expendab
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.item_expand, null);
-        ItemExpandBinding bi = DataBindingUtil.bind(view);
-        return new ViewHolder(bi);
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_expand, viewGroup,false));
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, final int i) {
+    public void onBindViewHolder(@NonNull  ViewHolder holder, @SuppressLint("RecyclerView")  int position) {
 
-        holder.bi.name.setText(personList.get(i).getName());
+        holder.name.setText(personList.get(position).getName());
 
-        Picasso.get().load(personList.get(i).getImage()).into(holder.bi.image);
+        Picasso.get().load(personList.get(position).getImage()).into(holder.image);
 
-        holder.bi.viewMoreBtn.setOnClickListener(new View.OnClickListener() {
+        holder.viewMoreBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                boolean show = toggleLayout(!personList.get(i).isExpanded(), v, holder.bi.layoutExpand);
-                personList.get(i).setExpanded(show);
+                boolean show = toggleLayout(!personList.get(position).isExpanded(), v, holder.layoutExpand);
+                personList.get(position).setExpanded(show);
             }
         });
 
@@ -74,13 +75,19 @@ public class ExpendableRecyclerViewAdapter extends RecyclerView.Adapter<Expendab
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        ItemExpandBinding bi;
 
-        public ViewHolder(@NonNull ItemExpandBinding itemView) {
-            super(itemView.getRoot());
+        private final TextView name;
+        private final ImageButton viewMoreBtn;
+        private final ImageView image;
+        private final LinearLayout layoutExpand;
 
-            bi = itemView;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
 
+            name = itemView.findViewById(R.id.name);
+            viewMoreBtn = itemView.findViewById(R.id.viewMoreBtn);
+            image = itemView.findViewById(R.id.image);
+            layoutExpand = itemView.findViewById(R.id.layoutExpand);
         }
     }
 }
