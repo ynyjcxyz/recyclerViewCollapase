@@ -1,10 +1,8 @@
 package com.codixlab.collapsingrecyclerview.model;
 
-public class Person {
-
+public class RawDataClass {
     String name;
     String description;
-    boolean isExpanded;
     int image;
 
     public int getImage() {
@@ -13,14 +11,6 @@ public class Person {
 
     public void setImage(int image) {
         this.image = image;
-    }
-
-    public boolean isExpanded() {
-        return isExpanded;
-    }
-
-    public void setExpanded(boolean expanded) {
-        isExpanded = expanded;
     }
 
     public String getName() {

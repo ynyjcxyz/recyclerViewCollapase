@@ -1,27 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-
-    >
-
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/parent"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
         android:background="#fff"
         android:clickable="true"
         android:focusable="true"
         android:gravity="center_vertical"
-        android:minHeight="?attr/actionBarSize"
         android:orientation="horizontal">
-
-        <View
-            android:layout_width="15dp"
-            android:layout_height="wrap_content" />
-
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/image"
@@ -30,55 +22,31 @@
             android:background="@android:color/transparent"
             android:src="@mipmap/ic_launcher" />
 
-        <View
-            android:layout_width="15dp"
-            android:layout_height="wrap_content" />
-
         <TextView
             android:id="@+id/name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Mutufa Ansari"
+            android:text="@string/mutufa_ansari"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="#37474F" />
 
-        <View
-            android:layout_width="15dp"
-            android:layout_height="wrap_content" />
-
-        <ImageButton
-            android:id="@+id/viewMoreBtn"
-            android:layout_width="?attr/actionBarSize"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_arrow"
-            android:tint="#666666" />
-
     </LinearLayout>
-
-    <View
-
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#f2f2f2" />
 
     <LinearLayout
         android:id="@+id/layoutExpand"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/parent"
         android:background="#f7f7f7"
         android:orientation="vertical"
         android:visibility="gone">
 
-
         <TextView
+            android:id="@+id/expendable_textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:text="@string/lorem" />
-
 
     </LinearLayout>
 

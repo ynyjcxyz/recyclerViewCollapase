@@ -5,89 +5,66 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.codixlab.collapsingrecyclerview.R;
 import com.codixlab.collapsingrecyclerview.model.Person;
 import com.codixlab.collapsingrecyclerview.util.animation.Animations;
 import com.squareup.picasso.Picasso;
-
 import java.util.List;
 
-public class ExpendableRecyclerViewAdapter extends RecyclerView.Adapter<ExpendableRecyclerViewAdapter.ViewHolder> {
-
+public class ExpendableRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
     Context context;
-    List<Person> personList;
+    List<Person> itemList;
+    List<Boolean> statusList;
 
     public ExpendableRecyclerViewAdapter(Context context, List<Person> list) {
-
         this.context = context;
-        this.personList = list;
+        this.itemList = list;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_expand, viewGroup,false));
-
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        return new ViewHolder
+                (LayoutInflater
+                        .from(context)
+                        .inflate(R.layout.item_expand, viewGroup, false));
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull  ViewHolder holder, @SuppressLint("RecyclerView")  int position) {
+    public void onBindViewHolder(ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        holder.name.setText(personList.get(position).getName());
+        holder.name.setText(itemList.get(position).getName());
 
-        Picasso.get().load(personList.get(position).getImage()).into(holder.image);
+        Picasso.get().load(itemList.get(position).getImage()).into(holder.image);
 
-        holder.viewMoreBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        holder.expendable_textView.setText("This is " + position + " position!");
 
-                boolean show = toggleLayout(!personList.get(position).isExpanded(), v, holder.layoutExpand);
-                personList.get(position).setExpanded(show);
-            }
+        holder.parent.setOnClickListener(view -> {
+            boolean show = toggleLayout(!itemList.get(position).isExpanded(), view, holder.layoutExpand);
+            itemList.get(position).setExpanded(show);
         });
-
     }
 
     private boolean toggleLayout(boolean isExpanded, View v, LinearLayout layoutExpand) {
-        Animations.toggleArrow(v, isExpanded);
+        Animations.switchBackgroundColor(v, isExpanded);
         if (isExpanded) {
             Animations.expand(layoutExpand);
         } else {
             Animations.collapse(layoutExpand);
         }
         return isExpanded;
-
     }
 
     @Override
     public int getItemCount() {
-        return personList.size();
-    }
-
-    class ViewHolder extends RecyclerView.ViewHolder {
-
-
-        private final TextView name;
-        private final ImageButton viewMoreBtn;
-        private final ImageView image;
-        private final LinearLayout layoutExpand;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            name = itemView.findViewById(R.id.name);
-            viewMoreBtn = itemView.findViewById(R.id.viewMoreBtn);
-            image = itemView.findViewById(R.id.image);
-            layoutExpand = itemView.findViewById(R.id.layoutExpand);
+        if (itemList != null) {
+            return itemList.size();
         }
+        return 0;
     }
+
 }

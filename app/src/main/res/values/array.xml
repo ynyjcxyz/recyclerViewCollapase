@@ -15,7 +15,6 @@
         <item>Nick R. Bocker</item>
     </string-array>
 
-
     <integer-array name="images">
         <item>@drawable/photo_female_1</item>
         <item>@drawable/photo_female_2</item>
