@@ -6,6 +6,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.codixlab.collapsingrecyclerview.R;
+import com.codixlab.collapsingrecyclerview.model.Person;
+import com.codixlab.collapsingrecyclerview.model.PersonModel;
+import com.codixlab.collapsingrecyclerview.util.animation.Animations;
+import com.squareup.picasso.Picasso;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
     protected final TextView name;
@@ -21,5 +25,27 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         layoutExpand = itemView.findViewById(R.id.layoutExpand);
         parent = itemView.findViewById(R.id.parent);
         expendable_textView = itemView.findViewById(R.id.expendable_textView);
+    }
+
+    public void bind(PersonModel personModel, int position) {
+        Person person = personModel.getPerson();
+        name.setText(person.getName());
+        Picasso.get().load(person.getImage()).into(image);
+        expendable_textView.setText("This is " + position + " position!");
+        bindExpandAction(personModel);
+    }
+
+    private void bindExpandAction(PersonModel personModel) {
+        parent.setOnClickListener(view -> onItemToggled(personModel));
+    }
+
+    private void onItemToggled(PersonModel personModel) {
+        boolean isExpanded = !personModel.isExpanded();
+        if (isExpanded) {
+            Animations.expand(layoutExpand);
+        } else {
+            Animations.collapse(layoutExpand);
+        }
+        personModel.setExpanded(isExpanded);
     }
 }

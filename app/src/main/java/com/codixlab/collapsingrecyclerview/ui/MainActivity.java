@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.codixlab.collapsingrecyclerview.R;
 import com.codixlab.collapsingrecyclerview.adapter.ExpendableRecyclerViewAdapter;
-import com.codixlab.collapsingrecyclerview.model.Person;
+import com.codixlab.collapsingrecyclerview.model.PersonModel;
 import com.codixlab.collapsingrecyclerview.util.Data;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     ExpendableRecyclerViewAdapter adapter;
-    List<Person> personList;
+    List<PersonModel> personList;
     private RecyclerView list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

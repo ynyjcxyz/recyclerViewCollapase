@@ -5,23 +5,22 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import com.codixlab.collapsingrecyclerview.R;
 import com.codixlab.collapsingrecyclerview.model.Person;
+import com.codixlab.collapsingrecyclerview.model.PersonModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Data {
-    public static List<Person> getPersonsData(Context context) {
-        List<Person> people = new ArrayList<>();
+    public static List<PersonModel> getPersonsData(Context context) {
+        List<PersonModel> people = new ArrayList<>();
         String[] persons = context.getResources().getStringArray(R.array.people);
-        @SuppressLint("Recycle") TypedArray images = context.getResources().obtainTypedArray(R.array.images);
+        TypedArray images = context.getResources().obtainTypedArray(R.array.images);
         for (int i = 0; i < persons.length; i++) {
-            Person person = new Person();
-            person.setName(persons[i]);
-            person.setImage(images.getResourceId(i, -1));
-            people.add(person);
+            Person person = new Person(persons[i], images.getResourceId(i, -1));
+            people.add(new PersonModel(person, false));
         }
+        images.recycle();
         return people;
-
     }
 
 }
