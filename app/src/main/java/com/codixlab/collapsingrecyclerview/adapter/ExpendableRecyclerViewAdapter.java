@@ -10,7 +10,7 @@ import com.codixlab.collapsingrecyclerview.model.PersonModel;
 
 import java.util.List;
 
-public class ExpendableRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
+public class ExpendableRecyclerViewAdapter extends RecyclerView.Adapter<ExpendableRecyclerViewViewHolder> {
     private final Context context;
     private final List<PersonModel> itemList;
 
@@ -21,15 +21,15 @@ public class ExpendableRecyclerViewAdapter extends RecyclerView.Adapter<ViewHold
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        return new ViewHolder
+    public ExpendableRecyclerViewViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        return new ExpendableRecyclerViewViewHolder
                 (LayoutInflater
                         .from(context)
                         .inflate(R.layout.item_expand, viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ExpendableRecyclerViewViewHolder holder, int position) {
         holder.bind(itemList.get(position), position);
     }
 

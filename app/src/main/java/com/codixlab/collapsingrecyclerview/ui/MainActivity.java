@@ -29,7 +29,5 @@ public class MainActivity extends AppCompatActivity {
         list.setLayoutManager(new LinearLayoutManager(this));
         list.setHasFixedSize(true);
         list.setAdapter(adapter);
-
-
     }
 }

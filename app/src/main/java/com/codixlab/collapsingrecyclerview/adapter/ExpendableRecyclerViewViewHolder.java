@@ -11,14 +11,14 @@ import com.codixlab.collapsingrecyclerview.model.PersonModel;
 import com.codixlab.collapsingrecyclerview.util.animation.Animations;
 import com.squareup.picasso.Picasso;
 
-public class ViewHolder extends RecyclerView.ViewHolder {
+public class ExpendableRecyclerViewViewHolder extends RecyclerView.ViewHolder {
     protected final TextView name;
     protected final ImageView image;
     protected final LinearLayout layoutExpand;
     protected final LinearLayout parent;
     protected final TextView expendable_textView;
 
-    public ViewHolder(View itemView) {
+    public ExpendableRecyclerViewViewHolder(View itemView) {
         super(itemView);
         name = itemView.findViewById(R.id.name);
         image = itemView.findViewById(R.id.image);
@@ -36,11 +36,12 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void bindExpandAction(PersonModel personModel) {
-        parent.setOnClickListener(view -> onItemToggled(personModel));
+        parent.setOnClickListener(view -> onItemToggled(personModel,view));
     }
 
-    private void onItemToggled(PersonModel personModel) {
+    private void onItemToggled(PersonModel personModel,View view) {
         boolean isExpanded = !personModel.isExpanded();
+        Animations.switchBackgroundColor(view, isExpanded);
         if (isExpanded) {
             Animations.expand(layoutExpand);
         } else {

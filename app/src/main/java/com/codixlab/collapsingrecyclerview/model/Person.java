@@ -14,7 +14,6 @@ public class Person {
         return image;
     }
 
-
     public String getName() {
         return name;
     }
